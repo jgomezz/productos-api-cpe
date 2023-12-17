@@ -111,8 +111,9 @@ public class ProductoController {
 	}
 
 	/**
-	 *  Delete product
-	 * @param id
+	 * Remove --> DELETE
+	 * Delete product
+	 * @param id 
 	 * @return
 	 */
 	@DeleteMapping("/productos/id/{id}")
