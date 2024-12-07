@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pe.edu.tecsup.productosapi.entities.Producto;
 import pe.edu.tecsup.productosapi.services.ProductoService;
 
+
 @RestController
 public class ProductoController {
 
@@ -34,9 +35,11 @@ public class ProductoController {
 	@Value("${app.storage.path}") 
 	private String STORAGEPATH;
 	
-	@Autowired
 	private ProductoService productoService;
 
+	public ProductoController(ProductoService productoService) {
+		this.productoService = productoService;
+	}
 
 	/**
 	 *  READ --> GET
@@ -140,7 +143,6 @@ public class ProductoController {
 		
 		return producto; 
 	}
-    
-    
+
 	
 }

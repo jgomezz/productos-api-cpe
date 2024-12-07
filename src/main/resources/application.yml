@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/tiendaapi?useSSL=false&serverTimezone=UTC
+    username: root
+    password:
+  jpa:
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+app:
+  storage:
+    path: /Users/jgomez/var/data/
