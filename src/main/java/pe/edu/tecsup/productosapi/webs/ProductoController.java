@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import pe.edu.tecsup.productosapi.entities.Producto;
 import pe.edu.tecsup.productosapi.services.ProductoService;
 
-
+@Slf4j
 @RestController
 public class ProductoController {
-
-	private static final Logger logger 
-		= LoggerFactory.getLogger(ProductoController.class);
-	
 
 	@Value("${app.storage.path}") 
 	private String STORAGEPATH;
@@ -56,11 +53,11 @@ public class ProductoController {
 	@GetMapping("/productos/images/{filename:.+}")
 	public ResponseEntity<Resource> getImage(@PathVariable String filename) throws Exception {
 
-		logger.info("call images: " + filename);
+		log.info("call images: " + filename);
 
 		Path path = Paths.get(STORAGEPATH).resolve(filename);
 
-		logger.info("Path: " + path);
+		log.info("Path: " + path);
 
 		if (!Files.exists(path)) {
 			return ResponseEntity.notFound().build(); //
@@ -68,7 +65,7 @@ public class ProductoController {
 
 		Resource resource = new UrlResource(path.toUri());
 
-		logger.info("Resource: " + resource);
+		log.info("Resource: " + resource);
 
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename='" + resource.getFilename() + "'")
@@ -91,7 +88,7 @@ public class ProductoController {
 						  @RequestParam("precio") Double precio,
 						  @RequestParam("detalles") String detalles) throws Exception {
 		
-		logger.info("call crear(" + nombre + ", " + precio + ", " + detalles + ", " + imagen + ")");
+		log.info("call crear(" + nombre + ", " + precio + ", " + detalles + ", " + imagen + ")");
 		
 		Producto producto = new Producto();
 		producto.setNombre(nombre);
@@ -121,7 +118,7 @@ public class ProductoController {
 	 */
 	@DeleteMapping("/productos/id/{id}")
 	public ResponseEntity<String> eliminar(@PathVariable Long id) {
-		logger.info("call eliminar: " + id);
+		log.info("call eliminar: " + id);
 		
 		productoService.deleteById(id);
 		
@@ -137,7 +134,7 @@ public class ProductoController {
 	 */
     @GetMapping("/productos/id/{id}")
 	public Producto obtener(@PathVariable Long id) throws Exception{
-		logger.info("call obtener: " + id);
+		log.info("call obtener: " + id);
 		
 		Producto producto = productoService.findById(id);
 		
