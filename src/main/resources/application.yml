@@ -12,3 +12,8 @@ spring:
 app:
   storage:
     path: /Users/jgomez/var/data/
+
+
+jwt :
+  secret : secret.3zqaf_il24ukszip0-6nu_jpie1i*b^9)_r@25uww8y844p^x0.tecsup.edu.pe
+  expiration : 3600000 # 1 hour in milliseconds

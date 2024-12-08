@@ -14,12 +14,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import pe.edu.tecsup.productosapi.entities.Producto;
@@ -27,6 +22,7 @@ import pe.edu.tecsup.productosapi.services.ProductoService;
 
 @Slf4j
 @RestController
+@RequestMapping("/api")
 public class ProductoController {
 
 	@Value("${app.storage.path}") 
@@ -87,7 +83,7 @@ public class ProductoController {
 						  @RequestParam("nombre") String nombre, 
 						  @RequestParam("precio") Double precio,
 						  @RequestParam("detalles") String detalles) throws Exception {
-		
+
 		log.info("call crear(" + nombre + ", " + precio + ", " + detalles + ", " + imagen + ")");
 		
 		Producto producto = new Producto();
@@ -132,6 +128,7 @@ public class ProductoController {
 	 * @return
 	 * @throws Exception
 	 */
+	/*
     @GetMapping("/productos/id/{id}")
 	public Producto obtener(@PathVariable Long id) throws Exception{
 		log.info("call obtener: " + id);
@@ -139,7 +136,14 @@ public class ProductoController {
 		Producto producto = productoService.findById(id);
 		
 		return producto; 
-	}
+	}*/
+	@GetMapping("/productos/id/{id}")
+	public Producto obtener(@PathVariable Long id) throws Exception{
+		log.info("call obtener: " + id);
 
+		Producto producto = productoService.findById(id);
+
+		return producto;
+	}
 	
 }
